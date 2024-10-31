@@ -126,7 +126,7 @@ img{
                 <p>${m.description}</p>
                            
             </div>            
-    <button class="card-button" onclick="window.open('${m.link}', '_blank')">Click me</button>
+    <button class="card-button" onclick="window.open('${m.link}', '_blank')">Directions</button>
         </div>
         </c:forEach>
     </div>

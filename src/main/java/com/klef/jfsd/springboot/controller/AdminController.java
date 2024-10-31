@@ -28,7 +28,9 @@ import com.klef.jfsd.springboot.model.Customer;
 import com.klef.jfsd.springboot.model.Education;
 import com.klef.jfsd.springboot.model.Hospital;
 import com.klef.jfsd.springboot.model.Hotel;
+import com.klef.jfsd.springboot.model.HotelBookings;
 import com.klef.jfsd.springboot.model.Mall;
+import com.klef.jfsd.springboot.model.RentalBookings;
 import com.klef.jfsd.springboot.model.Restaurant;
 import com.klef.jfsd.springboot.model.TouristAttractions;
 import com.klef.jfsd.springboot.service.AboutCityService;
@@ -74,12 +76,13 @@ public class AdminController {
 
 	@Autowired
 	private RentalBookingService rentalBookingService;
+	
 
 	@Autowired
 	private ContactService contactService;
 
 	@Autowired
-	private HotelBookingService bookingService;
+	private HotelBookingService hotelbookingService;
 
 	@Autowired
 	private MallService mallService;
@@ -293,6 +296,70 @@ public class AdminController {
 		List<Contactus> clist = contactService.viewallcontactus();
 		mv.addObject("clist", clist);		
 		return mv;		
+	}
+	
+	@GetMapping("viewhotelbookings")
+	public ModelAndView viewhotelbookings(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		if (request.getSession().getAttribute("user") == null) {
+			// If not logged in, redirect to adminlogin
+			return new ModelAndView("redirect:/adminlogin");
+		}
+		mv.setViewName("viewhotelbookings");
+		List<HotelBookings> hblist = hotelbookingService.viewallhotelbookings();
+		mv.addObject("hblist", hblist);		
+		return mv;		
+	}
+	
+	@GetMapping("deletehotelbooking")
+	public ModelAndView deletehotelbooking(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("deletehotelbooking");
+		if (request.getSession().getAttribute("user") == null) {
+			// If not logged in, redirect to adminlogin
+			return new ModelAndView("redirect:/adminlogin");
+		}
+		List<HotelBookings> hblist = hotelbookingService.viewallhotelbookings();
+		mv.addObject("hblist", hblist);		
+		return mv;
+	}
+	
+	@GetMapping("deletehotelbookingbyid/{id}")
+	public String deletehotelbookingbyid(@PathVariable("id") int id) {
+		adminService.deletehotelbookingbyid(id);
+		return "redirect:/deletehotelbooking";
+	}
+	
+	@GetMapping("viewrentalbookings")
+	public ModelAndView viewrentalbookings(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		if (request.getSession().getAttribute("user") == null) {
+			// If not logged in, redirect to adminlogin
+			return new ModelAndView("redirect:/adminlogin");
+		}
+		mv.setViewName("viewrentalbookings");
+		List<RentalBookings> rblist = rentalBookingService.viewallrentalbookings();
+		mv.addObject("rblist", rblist);		
+		return mv;		
+	}
+	
+	@GetMapping("deleterentalbooking")
+	public ModelAndView deleterentalbooking(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("deleterentalbooking");
+		if (request.getSession().getAttribute("user") == null) {
+			// If not logged in, redirect to adminlogin
+			return new ModelAndView("redirect:/adminlogin");
+		}
+		List<RentalBookings> rblist = rentalBookingService.viewallrentalbookings();
+		mv.addObject("rblist", rblist);	
+		return mv;
+	}
+	
+	@GetMapping("deleterentalbookingbyid/{id}")
+	public String deleterentalbookingbyid(@PathVariable("id") int id) {
+		adminService.deleterentalbookingbyid(id);
+		return  "redirect:/deleterentalbooking";
 	}
 
 	@GetMapping("updatecity")

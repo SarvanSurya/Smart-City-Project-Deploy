@@ -87,6 +87,8 @@ ul {
             	<a href="viewallabout">View About</a>
             	<a href="viewalltouristattractions">View Tourist Attractions</a>
             	<a href="viewqueries">View Queries</a>
+            	<a href="viewhotelbookings">View Hotel Bookings</a>
+            	<a href="viewrentalbookings">View Rental Bookings</a>
             </div>
             
         </li>
@@ -101,6 +103,8 @@ ul {
             	<a href="deletemall">Delete Mall</a>
             	<a href="deleterestaurant">Delete Restaurant</a>
             	<a href="deletecollege">Delete College</a>
+            	<a href="deletehotelbooking">Delete Hotel Bookings</a>
+            	<a href="deleterentalbooking">Delete Rental Booking</a>
             </div>
         </li>
         

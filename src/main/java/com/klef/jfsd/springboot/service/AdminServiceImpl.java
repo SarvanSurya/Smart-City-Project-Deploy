@@ -14,7 +14,9 @@ import com.klef.jfsd.springboot.model.Customer;
 import com.klef.jfsd.springboot.model.Education;
 import com.klef.jfsd.springboot.model.Hospital;
 import com.klef.jfsd.springboot.model.Hotel;
+import com.klef.jfsd.springboot.model.HotelBookings;
 import com.klef.jfsd.springboot.model.Mall;
+import com.klef.jfsd.springboot.model.RentalBookings;
 import com.klef.jfsd.springboot.model.Restaurant;
 import com.klef.jfsd.springboot.repository.AdminRepository;
 import com.klef.jfsd.springboot.repository.CityRepository;
@@ -23,8 +25,10 @@ import com.klef.jfsd.springboot.repository.ContactRepository;
 import com.klef.jfsd.springboot.repository.CustomerRepository;
 import com.klef.jfsd.springboot.repository.EducationRepository;
 import com.klef.jfsd.springboot.repository.HospitalRepository;
+import com.klef.jfsd.springboot.repository.HotelBookingRepository;
 import com.klef.jfsd.springboot.repository.HotelRepository;
 import com.klef.jfsd.springboot.repository.MallRepository;
+import com.klef.jfsd.springboot.repository.RentalBookingRepository;
 import com.klef.jfsd.springboot.repository.RestaurantRepository;
 
 @Service
@@ -59,6 +63,12 @@ public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private EducationRepository educationRepository;
+	
+	@Autowired
+	private HotelBookingRepository hotelBookingRepository;
+	
+	@Autowired
+	private RentalBookingRepository rentalBookingRepository;
 
 	@Override
 	public List<Customer> viewallcustomers() {
@@ -170,6 +180,22 @@ public class AdminServiceImpl implements AdminService {
 		Contactus c = contactRepository.findById(id).get();
 		contactRepository.delete(c);
 		return "Query Deleted";
+	}
+
+	@Override
+	public String deletehotelbookingbyid(int id) {
+		// TODO Auto-generated method stub
+		HotelBookings hb = hotelBookingRepository.findById(id).get();
+		hotelBookingRepository.delete(hb);
+		return "Hotel Booking Deleted Successfully";
+	}
+
+	@Override
+	public String deleterentalbookingbyid(int id) {
+		// TODO Auto-generated method stub
+		RentalBookings rb = rentalBookingRepository.findById(id).get();
+		rentalBookingRepository.delete(rb);
+		return "Rental Booking Deleted Successfully";
 	}
 
 }

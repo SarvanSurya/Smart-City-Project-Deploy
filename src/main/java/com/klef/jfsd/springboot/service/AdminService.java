@@ -26,5 +26,8 @@ public String deletemall(int id);
 public String deleterestaurant(int id);
 public String deletecollege(int id);
 public String deletequerybyid(int id);
+public String deletehotelbookingbyid(int id);
+public String deleterentalbookingbyid(int id);
+
 
 }
